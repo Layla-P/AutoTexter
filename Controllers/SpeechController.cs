@@ -36,26 +36,6 @@ namespace AutoTexter.Controllers
         {
             return Content("Hello");
         }
-
-        [HttpPost]
-        [Route("voice")]
-        public async Task<IActionResult> Voice([FromForm]TwilioResponse twilioResponse)
-        {
-            await CallResource.CreateAsync(to: new PhoneNumber("SITE_URL"), from: "SITE_URL",
-                url: new Uri($"{SiteUrl}/api/speech/call/{twilioResponse.MessageSid}"), method: "GET");
-            return Content("");
-        }
-
-        [HttpGet]
-        [Route("call/{messageSid}")]
-        public async Task<TwiMLResult> Call([FromRoute]string messageSid)
-        {
-            var message = await MessageResource.FetchAsync(pathSid: messageSid);
-            var response = await _textToSpeechService
-                .GetSpeech(message.Body, message.From.ToString());
-            var twiml = new VoiceResponse();
-            twiml.Play(new Uri(response.Path));
-            return TwiML(twiml);
-        }
+       
     }
 }

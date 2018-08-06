@@ -20,11 +20,14 @@ namespace AutoTexter
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //The following lines map the appsettings to the models in the Model folder
             services.Configure<TwilioAccount>(Configuration.GetSection("TwilioAccount"));
             services.Configure<CsAccount>(Configuration.GetSection("CsAccount"));
             services.Configure<StorageCreds>(Configuration.GetSection("StorageCreds"));
+            //The following two lines setup the dependency injection of both our services
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ITextToSpeechService, TextToSpeechService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

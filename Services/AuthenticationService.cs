@@ -8,26 +8,20 @@ namespace AutoTexter.Services
 {
     public class AuthenticationService: IAuthenticationService
     {
+        //Your Token API endpoint will most likely be the same as this one, but change it if it's not
         public static readonly string FetchTokenUri =
             "https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken";
 
         private readonly string _subscriptionKey;
+
         public AuthenticationService(IOptions<CsAccount> csAccount)
         {
             _subscriptionKey = csAccount.Value.SubscriptionKey;
         }
 
-        public async Task<string> FetchTokenAsync()
+        public Task<string> FetchTokenAsync()
         {
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _subscriptionKey);
-                var uriBuilder = new UriBuilder(FetchTokenUri);
-
-                var result = await client.PostAsync(uriBuilder.Uri.AbsoluteUri, null);
-                return await result.Content.ReadAsStringAsync();
-            }
+            throw new NotImplementedException();
         }
-
     }
 }
