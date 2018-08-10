@@ -19,7 +19,7 @@ namespace AutoTexter.Services
             _subscriptionKey = csAccount.Value.SubscriptionKey;
         }
 
-        public Task<string> FetchTokenAsync()
+        public async Task<string> FetchTokenAsync()
         {
             throw new NotImplementedException();
         }
