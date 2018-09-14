@@ -17,7 +17,6 @@ namespace AutoTexter.Controllers
     public class SpeechController : TwilioController
     {
         private readonly ITextToSpeechService _textToSpeechService;
-        private const string SiteUrl = "SITE_URL";
 
         //I am using Constructor Injection for the services we need.  This was set up in the Startup.cs file
         public SpeechController(IOptions<TwilioAccount> account, ITextToSpeechService textToSpeechService)
