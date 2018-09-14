@@ -17,7 +17,7 @@ namespace AutoTexter.Controllers
     public class SpeechController : TwilioController
     {
         private readonly ITextToSpeechService _textToSpeechService;
-        private const string SiteUrl = "SITE_URL";
+        //private const string SiteUrl = "SITE_URL";
 
         public SpeechController(IOptions<TwilioAccount> account, ITextToSpeechService textToSpeechService)
         {
@@ -41,8 +41,9 @@ namespace AutoTexter.Controllers
         [Route("voice")]
         public async Task<IActionResult> Voice([FromForm]TwilioResponse twilioResponse)
         {
+            var siteUrl = HttpContext.Request.Host.ToString();
             await CallResource.CreateAsync(to: new PhoneNumber("SITE_URL"), from: "SITE_URL",
-                url: new Uri($"{SiteUrl}/api/speech/call/{twilioResponse.MessageSid}"), method: "GET");
+                url: new Uri($"{siteUrl}/api/speech/call/{twilioResponse.MessageSid}"), method: "GET");
             return Content("");
         }
 
